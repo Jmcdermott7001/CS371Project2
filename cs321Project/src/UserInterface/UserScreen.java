@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package UserInterface;
-
+import Database.DatabaseManager;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author JM049812
@@ -14,8 +16,17 @@ public class UserScreen extends javax.swing.JFrame {
     /**
      * Creates new form UserScreen
      */
-    public UserScreen() {
+    DatabaseManager DB;
+    String User_id;
+    String[] columns=new String [] {
+                "Account ID", "Customer ID", "Customer Name", "Open Date", "Status", "Type"
+            };
+    public UserScreen(DatabaseManager DB, String User_id, String type) {
+        this.setTitle("Accounts Overview");
+        this.DB=DB;
+        this.User_id=User_id;
         initComponents();
+        this.populate_advertisements_table();
     }
 
     /**

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package UserInterface;
+import Database.DatabaseManager;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,7 +16,11 @@ public class UserLogin extends javax.swing.JFrame {
     /**
      * Creates new form UserLogin
      */
-    public UserLogin() {
+    DatabaseManager DB;
+    
+    public UserLogin(DatabaseManager DB) {
+        this.setTitle("Login");
+        this.DB=DB;
         initComponents();
     }
 
@@ -28,9 +34,9 @@ public class UserLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        User_ID_textbox = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        loginTypeComboBox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
 
@@ -39,16 +45,16 @@ public class UserLogin extends javax.swing.JFrame {
 
         jLabel1.setText("Username");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        User_ID_textbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                User_ID_textboxActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Login type:");
 
-        jComboBox2.setBackground(new java.awt.Color(204, 255, 255));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Moderator", " " }));
+        loginTypeComboBox.setBackground(new java.awt.Color(204, 255, 255));
+        loginTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Moderator", " " }));
 
         jButton1.setBackground(new java.awt.Color(0, 102, 204));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,8 +81,8 @@ public class UserLogin extends javax.swing.JFrame {
                     .addComponent(jCheckBox1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, 0, 196, Short.MAX_VALUE)
-                        .addComponent(jTextField1)))
+                        .addComponent(loginTypeComboBox, 0, 196, Short.MAX_VALUE)
+                        .addComponent(User_ID_textbox)))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,11 +91,11 @@ public class UserLogin extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(User_ID_textbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
@@ -100,55 +106,50 @@ public class UserLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void User_ID_textboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User_ID_textboxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_User_ID_textboxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String text=this.User_ID_textbox.getText();
+        String type=this.loginTypeComboBox.getSelectedItem().toString();
+        if (type == "User"){
+            boolean result=DB.checkUser(text);
+                 if(!result )
+       JOptionPane.showMessageDialog(this,
+        "Invalid user ID",
+        "Error",  
+        JOptionPane.ERROR_MESSAGE);
+                 else{
+                     System.out.println("we got to here");
+                     UserScreen userFrame = new UserScreen(DB,text,type);
+                     userFrame.setVisible(true);
+                     this.setVisible(false);
+                 }
+             }        
+        if (type == "Moderator"){
+            boolean result1=DB.checkModerator(text);
+                 if(!result1 )
+       JOptionPane.showMessageDialog(this,
+        "Invalid user ID",
+        "Error",  
+        JOptionPane.ERROR_MESSAGE);
+                 }
+       
+        else{
+           UserScreen userFrame=new UserScreen(DB,text,type);
+           userFrame.setVisible(true);
+           this.setVisible(false);
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UserLogin().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField User_ID_textbox;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> loginTypeComboBox;
     // End of variables declaration//GEN-END:variables
 }

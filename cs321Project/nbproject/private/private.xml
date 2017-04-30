@@ -4,7 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/jm049812/Documents/NetBeansProjects/cs321Project/src/UserInterface/UserLogin.java</file>
+            <file>file:/C:/Users/jm049812/Documents/NetBeansProjects/cs321Project/src/Database/DatabaseManager.java</file>
             <file>file:/C:/Users/jm049812/Documents/NetBeansProjects/cs321Project/src/UserInterface/UserScreen.java</file>
+            <file>file:/C:/Users/jm049812/Documents/NetBeansProjects/cs321Project/src/UserInterface/ModeratorScreen.java</file>
+            <file>file:/C:/Users/jm049812/Documents/NetBeansProjects/cs321Project/src/UserInterface/Main.java</file>
+            <file>file:/C:/Users/jm049812/Documents/NetBeansProjects/cs321Project/src/UserInterface/AddAdvertisement.java</file>
         </group>
     </open-files>
 </project-private>
