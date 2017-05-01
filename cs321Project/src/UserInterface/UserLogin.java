@@ -37,7 +37,7 @@ public class UserLogin extends javax.swing.JFrame {
         User_ID_textbox = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         loginTypeComboBox = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        LoginButton = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,12 +56,12 @@ public class UserLogin extends javax.swing.JFrame {
         loginTypeComboBox.setBackground(new java.awt.Color(204, 255, 255));
         loginTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Moderator", " " }));
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 204));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        LoginButton.setBackground(new java.awt.Color(0, 102, 204));
+        LoginButton.setForeground(new java.awt.Color(255, 255, 255));
+        LoginButton.setText("Login");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LoginButtonActionPerformed(evt);
             }
         });
 
@@ -80,7 +80,7 @@ public class UserLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBox1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(loginTypeComboBox, 0, 196, Short.MAX_VALUE)
                         .addComponent(User_ID_textbox)))
                 .addContainerGap(116, Short.MAX_VALUE))
@@ -99,7 +99,7 @@ public class UserLogin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(LoginButton)
                 .addGap(58, 58, 58))
         );
 
@@ -110,7 +110,7 @@ public class UserLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_User_ID_textboxActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         String text=this.User_ID_textbox.getText();
         String type=this.loginTypeComboBox.getSelectedItem().toString();
         if (type == "User"){
@@ -120,6 +120,7 @@ public class UserLogin extends javax.swing.JFrame {
         "Invalid user ID",
         "Error",  
         JOptionPane.ERROR_MESSAGE);
+        
                  else{
                      System.out.println("we got to here");
                      UserScreen userFrame = new UserScreen(DB,text,type);
@@ -134,19 +135,19 @@ public class UserLogin extends javax.swing.JFrame {
         "Invalid user ID",
         "Error",  
         JOptionPane.ERROR_MESSAGE);
-                 }
+                 
        
-        else{
-           UserScreen userFrame=new UserScreen(DB,text,type);
-           userFrame.setVisible(true);
-           this.setVisible(false);
+                else{
+                    UserScreen userFrame=new UserScreen(DB,text,type);
+                    userFrame.setVisible(true);
+                    this.setVisible(false);
         }// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }//GEN-LAST:event_LoginButtonActionPerformed
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LoginButton;
     private javax.swing.JTextField User_ID_textbox;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

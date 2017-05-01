@@ -100,6 +100,40 @@ public class DatabaseManager {
         }
         return false;
     }
+    public Object[][] getUserAdvertisements(String User_id) {
+        PreparedStatement stmt = null;
+        Object[][] result=new Object[][]{};
+        
+        String query = "SELECT Title, Title Description, Price, Date FROM Advertisements WHERE User_ID=?";
+
+        try {
+            stmt=connection.prepareStatement(query);
+            stmt.setString(1,User_id); //binding the parameter with the given string
+            ResultSet rs = stmt.executeQuery();
+            int count = getResultSetSize(rs);
+            result=getAdvertisementsData(count,rs);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return result;
+        }
+        return result;
+    }
+     private Object[][] getAdvertisementsData(int count,ResultSet rs) throws SQLException {
+        Object[][] result=new Object[count][6];
+        int index=0;
+       do {
+            String Title = rs.getString("Title");
+            String Title_Description = rs.getString("Title Description");
+            String Price = rs.getString("Price");
+            String Date = rs.getString("Date");
+            
+
+            Advertisements advertisement=new Advertisements(Title,Title_Description,Price,Date);
+            result[index++]=advertisement.toArray();
+        }
+       while(rs.next());
+        return result;
+    } 
     private int getResultSetSize(ResultSet rs) {
         int count = 0;
         try {
