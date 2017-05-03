@@ -15,7 +15,7 @@ import java.util.Properties;
 
 /**
  *
- * @author kuhail
+ * @author typhene
  */
 public class DatabaseManager {
     Connection connection;
