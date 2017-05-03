@@ -5,26 +5,7 @@ DROP TABLE IF EXISTS Statuses;
 DROP TABLE IF EXISTS Categories;
 
 
-create table IF NOT EXISTS Advertisements
-(Advertisement_ID smallint unsigned not null auto_increment,
- AdvTitle varchar(40),
- AdvDetails varchar (60),
- AdvDateTime DATE NOT NULL,
- Price double (10,2) not null,
- User_ID varchar(20),
- Moderator_ID varchar(20),
- Category_ID varchar(3),
- Status_ID varchar(2),
- constraint fk_user_id foreign key (User_ID) 
-  references Users (User_ID) ON DELETE CASCADE,
- constraint fk_moderator_id foreign key (Moderator_ID) 
-  references Moderators (User_ID) ON DELETE SET NULL,
- constraint fk_category_id foreign key (Category_ID) 
-  references Categories (Category_ID) ON DELETE RESTRICT,	
- constraint fk_status_id foreign key (Status_ID) 
-  references Status (Status_ID),
- constraint pk_advertisements primary key (Advertisement_ID)
-);
+
 create table IF NOT EXISTS Users
 (User_ID varchar(20),
  UsrFirst_Name varchar(20),
@@ -47,7 +28,26 @@ create table IF NOT EXISTS Categories
  CatName varchar(30),
  constraint pk_cat_id primary key (Category_ID)
 );
-
+create table IF NOT EXISTS Advertisements
+(Advertisement_ID smallint unsigned not null auto_increment,
+ AdvTitle varchar(40),
+ AdvDetails varchar (60),
+ AdvDateTime DATE NOT NULL,
+ Price double (10,2) not null,
+ User_ID varchar(20),
+ Moderator_ID varchar(20),
+ Category_ID varchar(3),
+ Status_ID varchar(2),
+ constraint fk_user_id foreign key (User_ID) 
+  references Users (User_ID) ON DELETE CASCADE,
+ constraint fk_moderator_id foreign key (Moderator_ID) 
+  references Moderators (User_ID) ON DELETE SET NULL,
+ constraint fk_category_id foreign key (Category_ID) 
+  references Categories (Category_ID) ON DELETE RESTRICT,	
+ constraint fk_status_id foreign key (Status_ID) 
+  references Status (Status_ID),
+ constraint pk_advertisements primary key (Advertisement_ID)
+);
 
 
 insert into Categories (Category_ID, CatName)
